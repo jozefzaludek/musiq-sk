@@ -23,16 +23,16 @@ export const Footer = () => {
                         <h4 className="font-semibold text-lg mb-3">Sledujte nás</h4>
                         <div className="flex space-x-4 text-xl">
                             <Link href="https://facebook.com" target="_blank" aria-label="Facebook">
-                                <img src="/facebook.png" alt="Facebook" className="w-6 h-6 hover:text-blue-600" />
+                                <img src="https://your-project.supabase.co/storage/v1/object/public/products/facebook.png" alt="Facebook" className="w-6 h-6 hover:text-blue-600" />
                             </Link>
                             <Link href="https://twitter.com" target="_blank" aria-label="Twitter">
-                                <img src="/x1.jpg" alt="Twitter" className="w-6 h-6 hover:text-blue-400" />
+                                <img src="https://your-project.supabase.co/storage/v1/object/public/products/x1.jpg" alt="Twitter" className="w-6 h-6 hover:text-blue-400" />
                             </Link>
                             <Link href="https://instagram.com" target="_blank" aria-label="Instagram">
-                                <img src="/instagram.webp" alt="Instagram" className="w-6 h-6 hover:text-pink-500" />
+                                <img src="https://your-project.supabase.co/storage/v1/object/public/products/instagram.webp" alt="Instagram" className="w-6 h-6 hover:text-pink-500" />
                             </Link>
                             <Link href="https://youtube.com" target="_blank" aria-label="YouTube">
-                                <img src="/y.png" alt="YouTube" className="w-6 h-6 hover:text-red-600" />
+                                <img src="https://your-project.supabase.co/storage/v1/object/public/products/y.png" alt="YouTube" className="w-6 h-6 hover:text-red-600" />
                             </Link>
                         </div>
                     </div>
@@ -71,11 +71,11 @@ export const Footer = () => {
                     <p>Na App Store a Google Play</p>
                     <div className="flex space-x-4 mt-4">
                         <Link href="https://www.apple.com/app-store/" target="_blank" aria-label="App Store">
-                                <img src="/app_store.png" alt="App Store" className="w-15 h-15 hover:text-blue-600"  />
+                                <img src="https://your-project.supabase.co/storage/v1/object/public/products/app_store.png" alt="App Store" className="w-15 h-15 hover:text-blue-600"  />
                         </Link>
 
                         <Link href="https://play.google.com/store/games?device=windows" target="_blank" aria-label="google_play">
-                                <img src="/google_play.png" alt="Google Play" className="w-15 h-15 hover:text-blue-600" />
+                                <img src="https://your-project.supabase.co/storage/v1/object/public/products/google_play.png" alt="Google Play" className="w-15 h-15 hover:text-blue-600" />
                         </Link>
                          
                     </div>

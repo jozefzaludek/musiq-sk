@@ -1,11 +1,20 @@
-
-import { stripe } from "@/lib/stripe";
+import { supabase, mapSupabaseProductToUI } from "@/lib/supabase";
 import { ProductList } from "../components/product-list";
 
 export default async function ProductsPage() {
-  const products = await stripe.products.list({
-    expand: ["data.default_price"],
-  });
+  // Načítaj všetky produkty
+  const { data: supabaseProducts, error } = await supabase
+    .from('products')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching products:', error);
+  }
+
+  const products = supabaseProducts 
+    ? supabaseProducts.map(mapSupabaseProductToUI)
+    : [];
 
   return (
     <div className="pb-8">
@@ -13,7 +22,7 @@ export default async function ProductsPage() {
         Všetky produkty
       </h1>
 
-      <ProductList products={products.data}></ProductList>
+      <ProductList products={products} />
     </div>
   );
 }

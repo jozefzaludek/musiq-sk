@@ -1,15 +1,25 @@
 import Image from "next/image";
-import { stripe } from "@/lib/stripe";
 import { Button } from "./components/ui/button";
 import Link from "next/link";
-import { Carousel } from "./components/carousel";
 import { RecommendedProducts } from "./components/RecommendedProducts";
+import { supabase, mapSupabaseProductToUI } from "@/lib/supabase";
 
 export default async function Home() {
-  const products = await stripe.products.list({
-    expand: ["data.default_price"],
-    limit: 5,
-  });
+  // Načítaj produkty zo Supabase
+  const { data: supabaseProducts, error } = await supabase
+    .from('products')
+    .select('*')
+    .limit(5)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching products:', error);
+  }
+
+  // Transformuj produkty na UI formát
+  const products = supabaseProducts 
+    ? supabaseProducts.map(mapSupabaseProductToUI)
+    : [];
 
   return (
     <div>
@@ -33,14 +43,9 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="py-8">
-        <Carousel products={products.data} />
-      </section>
-
       <section>
-        <RecommendedProducts products={products.data} />
+        <RecommendedProducts products={products} />
       </section>
-
     </div>
   );
 }

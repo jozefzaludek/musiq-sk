@@ -1,16 +1,14 @@
 import Link from "next/link";
-import Stripe from "stripe";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import type { UIProduct } from "@/lib/supabase";
 
 interface Props {
-  product: Stripe.Product;
+  product: UIProduct;
 }
 
 export const ProductCard = ({ product }: Props) => {
-  const price = product.default_price as Stripe.Price;
-
   return (
     <Link href={`/products/${product.id}`} className="block h-full">
       <Card className="group hover:shadow-2xl transition duration-300 py-0 h-full flex flex-col border-gray-300 gap-0">
@@ -34,9 +32,9 @@ export const ProductCard = ({ product }: Props) => {
           {product.description && (
             <p className="text-gray-600 text-sm mb-2">{product.description}</p>
           )}
-          {price && price.unit_amount && (
+          {product.default_price && product.default_price.unit_amount && (
             <p className="text-lg font-semibold text-gray-900">
-              {(price.unit_amount / 100).toFixed(2)}€
+              {(product.default_price.unit_amount / 100).toFixed(2)}€
             </p>
           )}
           <Button className="mt-4 bg-black text-white">Zobraziť viac</Button>
