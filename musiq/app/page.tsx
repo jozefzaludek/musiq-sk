@@ -23,7 +23,7 @@ export default async function Home() {
 
   return (
     <div>
-      <section className="relative rounded h-[350px] bg-cover bg-center bg-no-repeat py-8 sm:py-12" style={{backgroundImage: "url('https://your-project.supabase.co/storage/v1/object/public/products/piano.webp')", }}>
+      <section className="relative rounded h-[350px] bg-cover bg-center bg-no-repeat py-8 sm:py-12" style={{backgroundImage: "url('https://musiq-supa.supabase.co/storage/v1/object/public/products/piano.webp')", }}>
         <div className="absolute inset-0 bg-white/15 m"></div>
 
         <div className="relative z-10 mx-auto grid grid-cols-1 items-center justify-items-center gap-8 px-8 sm:px-16 md:grid-cols-2">
