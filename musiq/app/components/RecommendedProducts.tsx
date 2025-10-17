@@ -1,68 +1,68 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import { Button } from "./ui/button";
 import type { UIProduct } from "@/lib/supabase";
 
 interface Props {
   products: UIProduct[];
 }
 
-export const RecommendedProducts: React.FC<Props> = ({ products }) => {
-  return (
-    <section id="recommended-products" className="py-8">
-      <h2 className="text-2xl font-bold mb-6">Odporúčané produkty</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {products
-          .filter((product) => product.default_price !== null)
-          .map((product) => (
-            <div key={product.id} className="border rounded p-4 relative">
-              <Image
+export const RecommendedProducts = ({ products }: Props) => (
+  <div className="py-16">
+    <h2 className="text-4xl font-light mb-10 text-center">
+      Odporúčané produkty
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {products.map((product) => (
+        <div
+          key={product.id}
+          className="border rounded-lg shadow-sm overflow-hidden bg-white flex flex-col"
+        >
+          {product.images && product.images[0] && (
+            <div className="flex justify-center items-center bg-white h-[170px] mt-4 mb-2">
+              <img
                 src={product.images[0]}
                 alt={product.name}
-                width={250}
-                height={250}
-                className="object-cover rounded"
+                className="object-contain max-w-[170px] max-h-[170px] w-auto h-auto cursor-pointer"
               />
-              <div className="mt-4">
-                <h5 className="font-semibold text-lg">{product.name}</h5>
-                
-                <div className="text-yellow-400 flex space-x-1 mt-1 mb-2">
-                  {[...Array(5)].map((_, i) => (
-                    <FontAwesomeIcon key={i} icon={faStar} />
-                  ))}
-                </div>
-                
-                <h4 className="text-xl font-bold mb-2">
-                  {product.default_price?.unit_amount
-                    ? (product.default_price.unit_amount / 100).toFixed(2)
-                    : "0.00"}{" "}
-                  {product.default_price?.currency.toUpperCase() || "EUR"}
-                </h4>
-                
-                <div className="flex justify-between items-center mt-4">
-                  <Link
-                    href={`/products/${product.id}`}
-                    className="text-blue-600 hover:underline"
-                  >
-                    Detail produktu
-                  </Link>
-
-                  <button
-                    type="button"
-                    onClick={() => alert(`Pridané do košíka: ${product.name}`)}
-                    className="text-black hover:text-blue-600 inline-flex items-center"
-                    aria-label={`Pridať ${product.name} do košíka`}
-                  >
-                    <FontAwesomeIcon icon={faShoppingCart} size="lg" />
-                  </button>
-                </div>
-              </div>
             </div>
-          ))}
-      </div>
-    </section>
-  );
-};
+          )}
+          <div className="p-6 flex flex-col flex-grow">
+            <h5 className="font-light text-lg mb-2">{product.name}</h5>
+            <div className="text-yellow-400 flex space-x-1 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <FontAwesomeIcon key={i} icon={faStar} />
+              ))}
+            </div>
+            {/* Price and Cart icon row */}
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-xl font-light">
+                {product.default_price?.unit_amount
+                  ? (product.default_price.unit_amount / 100).toFixed(2)
+                  : "0.00"}{" "}
+                {product.default_price?.currency.toUpperCase() || "€"}
+              </span>
+              <button
+                type="button"
+                className="p-2 rounded-full hover:bg-gray-100 transition cursor-pointer"
+                onClick={() => alert(`Pridané do košíka: ${product.name}`)}
+                aria-label="Pridať do košíka"
+              >
+                <FontAwesomeIcon icon={faShoppingCart} className="text-gray-700 text-xl" />
+              </button>
+            </div>
+            {/* Detail button below */}
+            <Button asChild variant="default" className="bg-black text-white px-4 py-2 rounded w-full mt-2 font-light">
+              <Link href={`/products/${product.id}`}>
+                Detail produktu
+              </Link>
+            </Button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);

@@ -24,7 +24,7 @@ export const ProductCard = ({ product }: Props) => {
           </div>
         )}
         <CardHeader className="p-4">
-          <CardTitle className="text-xl font-bold text-gray-800">
+          <CardTitle className="text-xl font-light text-gray-800">
             {product.name}
           </CardTitle>
         </CardHeader>
@@ -33,11 +33,11 @@ export const ProductCard = ({ product }: Props) => {
             <p className="text-gray-600 text-sm mb-2">{product.description}</p>
           )}
           {product.default_price && product.default_price.unit_amount && (
-            <p className="text-lg font-semibold text-gray-900">
+            <p className="text-lg font-light text-gray-900">
               {(product.default_price.unit_amount / 100).toFixed(2)}€
             </p>
           )}
-          <Button className="mt-4 bg-black text-white">Zobraziť viac</Button>
+          <Button className="mt-4 bg-black text-white font-light">Zobraziť viac</Button>
         </CardContent>
       </Card>
     </Link>
