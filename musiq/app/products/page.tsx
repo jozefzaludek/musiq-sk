@@ -4,15 +4,15 @@ import { ProductList } from "../components/product-list";
 export default async function ProductsPage() {
   // Načítaj všetky produkty
   const { data: supabaseProducts, error } = await supabase
-    .from('products')
-    .select('*')
-    .order('created_at', { ascending: false });
+    .from("products")
+    .select("*")
+    .order("created_at", { ascending: false });
 
   if (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
   }
 
-  const products = supabaseProducts 
+  const products = supabaseProducts
     ? supabaseProducts.map(mapSupabaseProductToUI)
     : [];
 
@@ -22,7 +22,9 @@ export default async function ProductsPage() {
         Všetky produkty
       </h1>
 
-      <ProductList products={products} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ProductList products={products} />
+      </div>
     </div>
   );
 }
